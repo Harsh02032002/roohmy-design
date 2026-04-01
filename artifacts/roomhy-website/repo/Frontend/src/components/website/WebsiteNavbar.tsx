@@ -1,36 +1,99 @@
-import React from 'react';
-import { Building2, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Building2, Menu, X, Zap, Home, Building, PlusCircle, Phone } from 'lucide-react';
 
 export default function WebsiteNavbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const navLinks = [
+    { to: '/', label: 'Home', icon: <Home className="w-4 h-4" /> },
+    { to: '/website/ourproperty', label: 'Our Properties', icon: <Building className="w-4 h-4" /> },
+    { to: '/website/list-property', label: 'List Your Property', icon: <PlusCircle className="w-4 h-4" /> },
+    { to: '/website/contact', label: 'Contact', icon: <Phone className="w-4 h-4" /> },
+  ];
+
+  const isActive = (to: string) =>
+    to === '/'
+      ? location.pathname === '/' || location.pathname === '/website/index'
+      : location.pathname === to;
+
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-2">
-            <Building2 className="w-8 h-8 text-teal-500" />
+
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2">
+            <Building2 className="w-8 h-8 text-blue-600" />
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">ROOMHY<span className="text-teal-500">.com</span></h1>
+              <h1 className="text-xl font-bold text-gray-900">ROOMHY<span className="text-blue-600">.com</span></h1>
               <p className="text-xs text-gray-500">Discover Your Next Home</p>
             </div>
+          </Link>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                  isActive(link.to)
+                    ? 'bg-blue-50 text-blue-600'
+                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                }`}
+              >
+                {link.icon}
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          <div className="hidden md:flex items-center space-x-6">
-            <a href="/website/index" className="text-gray-700 hover:text-teal-500 transition-colors font-medium">Home</a>
-            <a href="/website/ourproperty" className="text-gray-700 hover:text-teal-500 transition-colors font-medium">Properties</a>
-            <a href="/website/faq" className="text-gray-700 hover:text-teal-500 transition-colors font-medium">FAQ</a>
-            <a href="/website/about" className="text-gray-700 hover:text-teal-500 transition-colors font-medium">About</a>
-            <a href="/website/contact" className="text-gray-700 hover:text-teal-500 transition-colors font-medium">Contact</a>
-          </div>
-
-          <div className="flex items-center space-x-2 md:space-x-4">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-3 md:px-4 py-2 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg text-sm md:text-base whitespace-nowrap">
-              BidNow
-            </button>
-            <button className="text-gray-700 hover:text-teal-500 transition-colors">
-              <Users className="w-6 h-6" />
+          {/* Right side - Bid Now CTA */}
+          <div className="flex items-center gap-3">
+            <Link
+              to="/website/fast-bidding"
+              className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg text-sm whitespace-nowrap"
+            >
+              <Zap className="w-4 h-4" />
+              Bid Now
+            </Link>
+            <button
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden border-t border-gray-100 pb-4 pt-2 space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setMenuOpen(false)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                  isActive(link.to) ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                }`}
+              >
+                {link.icon}
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              to="/website/fast-bidding"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-3 mx-4 mt-2 justify-center bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-lg font-semibold transition-all"
+            >
+              <Zap className="w-4 h-4" />
+              Bid Now
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );

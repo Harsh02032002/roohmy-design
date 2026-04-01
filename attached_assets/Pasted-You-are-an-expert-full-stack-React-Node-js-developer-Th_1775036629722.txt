@@ -1,0 +1,79 @@
+You are an expert full-stack React + Node.js developer. This is the Roomhy (roohmy-design) project on Replit.
+
+GitHub: https://github.com/Harsh02032002/roohmy-design.git
+
+TASK: Completely refactor the entire website to make it fully dynamic, production-ready, and modern like Stanza Living + Agoda (see the 5 screenshots I uploaded).
+
+### 1. First Step - File Conversion & Cleanup
+- All .tsx files → convert to .jsx (no TypeScript).
+- Remove ALL static/hardcoded data (cities, properties, areas, offers, reviews, etc.).
+- Every section must fetch data from backend APIs (use the same API endpoints already present in the code: `/api/locations/cities`, `/api/locations/areas`, `/api/approved-properties/public/approved`, etc.).
+
+### 2. Core Features to Add/Integrate
+
+**A. Fast Bidding Page (already given)**
+- Keep the full `WebsiteFastBidding.jsx` code exactly as provided.
+- Add "Bid Now" button in every property card (both on home and /ourproperty page).
+- Clicking "Bid Now" should open the fast bidding form (same as the provided component) pre-filled with the selected property.
+
+**B. Property Listing Module**
+- Add "List Your Property" link in navbar (already have WebsiteList.jsx).
+- Make it fully dynamic – data goes to backend `/api/website-enquiry/submit`.
+- After successful submit, show success message and clear form.
+
+**C. Our Properties Page (/ourproperty) – Make it like Agoda**
+- Left sidebar filters (exactly like the 2nd & 3rd screenshot).
+- Search bar at top – make it wider and slimmer (like Agoda).
+- Property cards: image + "Bid Now" button on right.
+- Hover effect on images: image shrinks slightly + overlay text appears (exactly like screenshot 1 "New-age hostels...", "Co-living for Professionals", "Managed Apartments").
+- Use the `WebsiteOurproperty.jsx` code I gave you as base and upgrade it with the above.
+
+**D. Home Page (index) – Modern & Dynamic (Stanza + Trending Carousel Style)**
+
+1. **Hero Section**
+   - Big hero like Stanza: "Your second home in a new city"
+   - Search bar: "Find in and around... Search your college" + Search button
+   - Stats: 15+ Cities | 450+ Residences | 70,000+ Beds (dynamic count from backend)
+
+2. **New Section – Popular Cities (add before What We Offer)**
+   - Horizontal scrolling carousel (exactly like screenshot 4 & 5)
+   - If >4 cities → left/right arrows appear
+   - Auto-slide every 4 seconds
+   - Each card: city image + name + number of properties
+
+3. **What We Offer Section (upgrade to trending style)**
+   - Cards exactly like screenshot 1 (image + overlay text on hover)
+   - Image shrinks a bit on hover + content appears on top
+   - If more than 4 cards → left/right arrows + auto-slide (trending style like screenshots 4-5)
+
+4. **Reviews Section**
+   - Auto-sliding carousel (keeps moving on its own)
+   - 3-4 review cards visible with smooth slide
+
+5. **Remove** entire "How Roomhy Works" section.
+
+6. **Merge** "Why Roomhy" + "Why Students Choose Us" into ONE beautiful single section called **"Why Students Love Roomhy"** (modern cards with icons).
+
+### 3. Backend Connection Rules
+- All data (cities, areas, properties, offers, reviews, stats) must come from backend.
+- Superadmin panel data should instantly reflect on website (no hard refresh needed).
+- Use the same API structure already in the three components you have.
+- If any new endpoint is needed, create it in backend (but prefer existing ones).
+
+### 4. UI/UX Requirements
+- Overall look & feel → clean, modern, blue-yellow accent like Stanza Living
+- Mobile-first + fully responsive
+- Tailwind + Lucide icons (already used)
+- Smooth animations and hover effects
+- Navbar should have: Home, Our Properties, List Your Property, Fast Bidding, Contact
+
+### 5. Final Output
+After making all changes:
+- Give me the complete updated folder structure
+- Tell me which files were modified
+- Provide the main index.jsx (home page) code with all new sections
+- Confirm that everything is now dynamic and connected to backend
+
+Start by analyzing the three components I provided (WebsiteFastBidding, WebsiteList, WebsiteOurproperty) and the 5 screenshots.
+
+Now begin the refactor.
